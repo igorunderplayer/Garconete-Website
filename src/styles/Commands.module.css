@@ -1,11 +1,10 @@
 .container {
-   min-height: 100vh;
-   min-width: 100vw;
+  padding: 0 2rem
 }
 
 .main {
+  min-height: 100vh;
   color: #fff;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,10 +13,12 @@
 }
 
 .commands {
-  list-style-type: none
+  list-style-type: none;
+  width: 512px;
+  max-width: 95%;
 }
 
 .commands li {
-  margin: 5px
+  margin: 5px;
 }
 

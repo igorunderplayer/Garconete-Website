@@ -1,6 +1,7 @@
 import { NextPage } from 'next'
+import { GetStaticProps } from 'next'
 import React, { useEffect, useState } from 'react'
-import {Command} from '../components/Command'
+import { Command } from '../components/Command'
 import api from '../services/api'
 
 import styles from '../styles/Commands.module.css'
@@ -10,16 +11,7 @@ interface Command {
   description: string
 }
 
-const Commands: NextPage = () => {
-  const [commands, setCommands] = useState<Command[]>([])
-
-  useEffect(() => {
-    api.get('/commands')
-    .then(res => {
-      setCommands(res.data.data)
-    })
-  }, [])
-
+const Commands: NextPage<{ commands: Command[] }> = ({ commands }) => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -28,7 +20,7 @@ const Commands: NextPage = () => {
         <ul className={styles.commands}>
           { commands.map(cmd => (
             <li key={cmd.name}>
-              <Command name={cmd.name} description={cmd.description} />
+              <Command command={cmd} />
             </li>
           )) }
         </ul>
@@ -38,3 +30,17 @@ const Commands: NextPage = () => {
 }
 
 export default Commands
+
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await api.get('/commands')
+
+  const { data : commands } = res.data
+  console.log(commands)
+
+  return {
+    props: {
+      commands: commands ?? []
+    },
+    revalidate: 60 * 60 * 24 // 1 day (i think)
+  } 
+}
