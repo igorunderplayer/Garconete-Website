@@ -35,7 +35,6 @@ export const getStaticProps: GetStaticProps = async () => {
   const res = await api.get('/commands')
 
   const { data : commands } = res.data
-  console.log(commands)
 
   return {
     props: {

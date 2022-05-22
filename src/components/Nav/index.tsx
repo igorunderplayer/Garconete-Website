@@ -11,8 +11,6 @@ const Nav: React.FC = () => {
           <li>
             <Link href="/commands">Commands</Link>
           </li>
-          <li>Nekos</li>
-          <li>Lolis</li>
       </ul>
     </nav>
   )
