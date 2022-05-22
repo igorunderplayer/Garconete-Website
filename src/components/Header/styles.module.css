@@ -1,12 +1,10 @@
 .container {
   background: #111;
   height: 48px;
-  width: 100vw;
   color: #fff;
   border-bottom: solid #777 1px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px
 }
