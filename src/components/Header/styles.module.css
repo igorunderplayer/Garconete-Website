@@ -10,3 +10,19 @@
   margin-bottom: 5px;
   padding: 0 10px;
 }
+
+.user {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+}
+
+.userAvatar {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #57F287;
+  border-radius: 50%;
+  overflow: hidden
+}
