@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.container li {
+  display: inline;
+  padding: 5px;
+  margin: 5px
+}
