@@ -17,10 +17,10 @@ const Header: React.FC = () => {
       <Nav />
       
       { !!user && (
-        <Link href="/commands"> { /* temp */ }
+        <Link href="/users/@me">
           <div className={styles.user}>
             {user.username}
-            <div className={styles.userAvatar}>
+            <div className={styles.userAvatar} style={{ borderColor: user.bannerColor }}>
               <Image
                 src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=512`}
                 alt="Foto de perfil do usuario"
