@@ -36,16 +36,9 @@ export const UserProvider: React.FC<Props> = (props) => {
   const router = useRouter()
   const [user, setUser] = useState<IUser>(null)
 
-  useEffect(() => {
-    const { code } = router.query
-    if (code && typeof code === 'string') {
-      loginWithCode(code)
-    }
-  }, [router])
-
   const loginWithCode = async (code: string) => {
     try {
-      const res = await api.post<{ message: string, data: IRawUser}>('/auth/login', {
+      const res = await api.post<{ message: string, data: IRawUser, token: string}>('/auth/login', {
         code
       })
 
@@ -61,6 +54,8 @@ export const UserProvider: React.FC<Props> = (props) => {
           accentColor: data.accent_color
         })
 
+        localStorage.setItem('token', res.data.token)
+
         router.replace('/')
       }
     } catch (err) {
@@ -68,6 +63,38 @@ export const UserProvider: React.FC<Props> = (props) => {
     }
   }
 
+  useEffect(() => {
+    const { code } = router.query
+    if (code && typeof code === 'string') {
+      loginWithCode(code)
+      return
+    }
+
+    const token = localStorage.getItem('token')
+
+    if (!user && token) {
+      try {
+        api.get('users/@me', {
+          headers: {
+            authorization: token
+          }
+        }).then(res => {
+          if (res.status == 200) {
+            const { user } = res.data
+            console.log(user)
+
+            setUser(user)
+        }
+      })
+      } catch(err) {
+        console.error(err)
+        localStorage.removeItem('token')
+      }
+    }
+
+  }, [router])
+
+  
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {props.children} 

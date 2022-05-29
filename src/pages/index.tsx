@@ -7,9 +7,6 @@ export default function Home() {
   
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Garçonete UnderPlayer</title>
-      </Head>
       <main className={styles.main}>
         <div className={styles.botAvatar}>
           <Image

@@ -1,5 +1,6 @@
 import { NextPage } from 'next'
 import { GetStaticProps } from 'next'
+import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import { Command } from '../components/Command'
 import api from '../services/api'
@@ -14,6 +15,9 @@ interface Command {
 const Commands: NextPage<{ commands: Command[] }> = ({ commands }) => {
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Garçonete • Commands</title>
+      </Head>
       <main className={styles.main}>
         COMANDOS
 
